@@ -19,32 +19,371 @@
       margin: 0;
       padding: 0;
       min-height: 100%;
-      background: #111;
+      background: #f8eef5;
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    .mensaje {
-      min-height: 100vh;
+    body {
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 25px;
-      text-align: center;
-      color: white;
     }
 
-    .mensaje h1 {
-      margin: 0;
-      font-size: 32px;
+    .pagina {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      min-height: 100vh;
+      overflow: hidden;
+      background: #f8eef5;
+    }
+
+    .imagen {
+      display: block;
+      width: 100%;
+      height: auto;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /*
+      PORTADA
+    */
+
+    #pantallaPortada {
+      position: relative;
+      width: 100%;
+    }
+
+    #cursorAnimado {
+      position: absolute;
+      z-index: 5;
+
+      /*
+        Posición del cursor sobre el sobre.
+      */
+      left: 57%;
+      top: 73%;
+      width: 12%;
+      height: auto;
+
+      pointer-events: none;
+    }
+
+    /*
+      Zona invisible para entrar a la invitación.
+      Es deliberadamente más grande que el cursor
+      para que sea fácil tocarla desde un celular.
+    */
+
+    #abrirInvitacion {
+      position: absolute;
+      z-index: 10;
+      left: 28%;
+      top: 59%;
+      width: 62%;
+      height: 30%;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /*
+      INVITACIÓN COMPLETA
+    */
+
+    #pantallaInvitacion {
+      position: relative;
+      display: none;
+      width: 100%;
+    }
+
+    #pantallaInvitacion.visible {
+      display: block;
+      animation: aparecer 0.55s ease;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /*
+      Zonas transparentes de la invitación.
+
+      Las coordenadas están expresadas en porcentajes,
+      de modo que se mantendrán alineadas en celulares,
+      tabletas y computadora.
+    */
+
+    .zona {
+      position: absolute;
+      z-index: 10;
+      display: block;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /*
+      Confirmar a mamá
+    */
+
+    .confirmar-mama {
+      left: 18%;
+      top: 75.4%;
+      width: 25.5%;
+      height: 4%;
+    }
+
+    /*
+      Confirmar a papá
+    */
+
+    .confirmar-papa {
+      left: 50%;
+      top: 75.4%;
+      width: 24.5%;
+      height: 4%;
+    }
+
+    /*
+      Mesa de regalos:
+      incluye el ícono y el texto correspondiente.
+    */
+
+    .regalos {
+      left: 3%;
+      top: 81%;
+      width: 70%;
+      height: 10%;
+    }
+
+    /*
+      Ubicación:
+      incluye el mapa y el texto de ubicación.
+    */
+
+    .ubicacion {
+      left: 3%;
+      top: 90%;
+      width: 69%;
+      height: 9%;
+    }
+
+    /*
+      Control flotante de música.
+    */
+
+    #controlMusica {
+      position: fixed;
+      right: 15px;
+      bottom: 15px;
+      z-index: 100;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      width: 50px;
+      height: 50px;
+
+      border: 3px solid white;
+      border-radius: 50%;
+
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+
+      font-size: 21px;
+      cursor: pointer;
+
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    #controlMusica.visible {
+      display: flex;
     }
   </style>
 </head>
 
 <body>
 
-  <main class="mensaje">
-    <h1>🎉 Estás invitado 🎉</h1>
+  <main class="pagina">
+
+    <!-- PANTALLA 1: PORTADA -->
+
+    <section id="pantallaPortada">
+
+      <img
+        class="imagen"
+        src="portada.png"
+        alt="Portada de la invitación"
+        fetchpriority="high">
+
+      <img
+        id="cursorAnimado"
+        src="cursor.gif"
+        alt="Toca aquí">
+
+      <button
+        id="abrirInvitacion"
+        type="button"
+        aria-label="Abrir invitación">
+      </button>
+
+    </section>
+
+    <!-- PANTALLA 2: INVITACIÓN -->
+
+    <section id="pantallaInvitacion">
+
+      <img
+        class="imagen"
+        src="invitacion.png"
+        alt="Invitación al Baby Shower">
+
+      <!-- Cambia estas direcciones por las reales -->
+
+      <a
+        class="zona confirmar-mama"
+        href="https://wa.me/5217714160343?text=Hola,%20confirmo%20mi%20asistencia%20al%20baby%20shower.%20😊"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Confirmar asistencia con mamá">
+      </a>
+
+      <a
+        class="zona confirmar-papa"
+        href="https://wa.me/5215514404914?text=Hola,%20confirmo%20mi%20asistencia%20al%20baby%20shower.%20😊"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Confirmar asistencia con papá">
+      </a>
+
+      <a
+        class="zona regalos"
+        href="https://www.wishbob.com/rhplzjvqis"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Ver opciones de regalo">
+      </a>
+
+      <a
+        class="zona ubicacion"
+        href="https://maps.app.goo.gl/aWCSBkuvvct5XDB57"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Abrir ubicación">
+      </a>
+
+    </section>
+
   </main>
+
+  <!-- Música -->
+
+  <audio
+    id="musica"
+    src="musica.mp3"
+    preload="auto"
+    loop
+    playsinline>
+  </audio>
+
+  <button
+    id="controlMusica"
+    type="button"
+    aria-label="Pausar música">
+    🔊
+  </button>
+
+  <script>
+    const pantallaPortada =
+      document.getElementById('pantallaPortada');
+
+    const pantallaInvitacion =
+      document.getElementById('pantallaInvitacion');
+
+    const abrirInvitacion =
+      document.getElementById('abrirInvitacion');
+
+    const musica =
+      document.getElementById('musica');
+
+    const controlMusica =
+      document.getElementById('controlMusica');
+
+    abrirInvitacion.addEventListener('click', async function () {
+      pantallaPortada.style.display = 'none';
+      pantallaInvitacion.classList.add('visible');
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'instant'
+      });
+
+      musica.volume = 0.45;
+
+      try {
+        await musica.play();
+
+        controlMusica.textContent = '🔊';
+        controlMusica.setAttribute(
+          'aria-label',
+          'Pausar música'
+        );
+      } catch (error) {
+        console.log(
+          'El navegador no permitió reproducir la música:',
+          error
+        );
+
+        controlMusica.textContent = '▶️';
+        controlMusica.setAttribute(
+          'aria-label',
+          'Reproducir música'
+        );
+      }
+
+      controlMusica.classList.add('visible');
+    });
+
+    controlMusica.addEventListener('click', async function () {
+      if (musica.paused) {
+        try {
+          await musica.play();
+
+          controlMusica.textContent = '🔊';
+          controlMusica.setAttribute(
+            'aria-label',
+            'Pausar música'
+          );
+        } catch (error) {
+          console.log(
+            'No fue posible reproducir la música:',
+            error
+          );
+        }
+      } else {
+        musica.pause();
+
+        controlMusica.textContent = '🔇';
+        controlMusica.setAttribute(
+          'aria-label',
+          'Reanudar música'
+        );
+      }
+    });
+  </script>
 
 </body>
 </html>
