@@ -57,12 +57,14 @@
     #cursorAnimado {
       position: absolute;
       z-index: 5;
+      animation: flotarCursor 1.8s ease-in-out infinite;
+      transform-origin: center;
 
       /*
         Posición del cursor sobre el sobre.
       */
       left: 47%;
-      top: 63%;
+      top: 68%;
       width: 12%;
       height: auto;
 
@@ -212,6 +214,20 @@
     #controlMusica.visible {
       display: flex;
     }
+    @keyframes flotarCursor {
+
+      0% {
+        transform: translateY(0px) scale(1);
+      }
+
+      50% {
+      transform: translateY(-6px) scale(1.04);
+      }
+
+      100% {
+      transform: translateY(0px) scale(1);
+    }
+}
   </style>
 </head>
 
